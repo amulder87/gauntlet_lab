@@ -185,10 +185,13 @@ namespace GauntletWeb {
       const arr:HTMLInputElement[]=[];
       vals.forEach((v,i)=>{const td=el("td");const inp=el("input","input compact") as HTMLInputElement;inp.type="number";inp.value=v;inp.disabled=readonly;inp.step=i===0?"1":"any";td.appendChild(inp);tr.appendChild(td);arr.push(inp);});body.appendChild(tr);roleInputs.set(role,arr);
     }
-    const actions=el("div","actions");fields.appendChild(actions);
+    const footer=el("div","helper-actions");fields.appendChild(footer);
+    const helper=readonly
+      ? el("p","muted","Clone is synchronized automatically from Me. All stats match Me except movement speed, which is 90% of Me and rounded to one decimal place.")
+      : el("p","muted","Success and double-gather fields are percentages in the UI. Changes are saved in this browser when applied.");
+    footer.appendChild(helper);
+    const actions=el("div","actions");footer.appendChild(actions);
     const apply=el("button","primary","Apply profile changes");apply.disabled=readonly;actions.appendChild(apply);
-    if(readonly) editor.appendChild(el("p","muted","Clone is synchronized automatically from Me. All stats match Me except movement speed, which is 90% of Me and rounded to one decimal place."));
-    else editor.appendChild(el("p","muted","Success and double-gather fields are percentages in the UI. Changes are saved in this browser when applied."));
     apply.onclick=()=>{
       try{
         const old=selectedProfile;let newName=nameInput.value.trim();if(!newName)throw new Error("Name cannot be empty");if(newName!==old&&state.profiles[newName])throw new Error("A profile with that name already exists");
@@ -216,8 +219,9 @@ namespace GauntletWeb {
       const rtd=el("td");const rs=roleSelect(slot.manual_role);rtd.appendChild(rs);tr.appendChild(rtd);table.appendChild(tr);
       ps.onchange=()=>{slot.profile_name=ps.value;saveStateNow();};rs.onchange=()=>{slot.manual_role=rs.value as Gauntlet.Role;saveStateNow();};
     }
-    party.appendChild(el("p","muted","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
-    const runActions=el("div","actions");party.appendChild(runActions);
+    const partyFooter=el("div","helper-actions experiment-actions");party.appendChild(partyFooter);
+    partyFooter.appendChild(el("p","muted","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
+    const runActions=el("div","actions");partyFooter.appendChild(runActions);
     const sim=el("button","primary","Simulate current roles");const opt=el("button","primary","Optimize all role assignments");const cancel=el("button","secondary","Cancel");cancel.disabled=!running;runActions.append(sim,opt,cancel);
     sim.disabled=!!running;opt.disabled=!!running;
     sim.onclick=()=>simulateCurrent();opt.onclick=()=>optimizeCurrent();cancel.onclick=()=>cancelRun();
