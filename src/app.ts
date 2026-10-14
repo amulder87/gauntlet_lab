@@ -3,7 +3,7 @@
 /// <reference path="./optimizer.ts" />
 namespace GauntletWeb {
   const STORAGE_KEY = "gauntlet-lab-web-current-v3";
-  const VERSION = "0.1.0";
+  const VERSION = "0.2.0";
   let factoryDoc: Gauntlet.ConfigDocument;
   let factoryState: Gauntlet.AppState;
   let state: Gauntlet.AppState;
@@ -48,6 +48,13 @@ namespace GauntletWeb {
       catch { state = Gauntlet.deepClone(factoryState); }
     } else state = Gauntlet.deepClone(factoryState);
     Gauntlet.cloneFromMe(state);
+    // v0.2 gives the rankings enough room for the usual 12 finalists while
+    // keeping a six-wave detail distribution visible below. Preserve any
+    // splitter position the user has actually customized.
+    if (Math.abs((state.settings.results_top_ratio ?? 0.34) - 0.34) < 1e-9) {
+      state.settings.results_top_ratio = 0.44;
+    }
+    applyAllSplitRatios();
     saveStateNow();
   }
 
@@ -310,13 +317,38 @@ namespace GauntletWeb {
   }
   function renderResultTab(data:ResultTabData):void{
     let panel=document.querySelector<HTMLElement>(`.tab-panel[data-tab="${data.id}"]`);if(!panel){panel=el("main","tab-panel result-panel");panel.dataset.tab=data.id;qs("#panels").appendChild(panel);}panel.innerHTML="";
-    const split=el("div","result-split");panel.appendChild(split);applySplitRatio(split);
-    const top=el("section","card result-top");const handle=el("div","splitter");const bottom=el("section","card result-bottom");split.append(top,handle,bottom);top.appendChild(el("div","card-title","Rankings"));bottom.appendChild(el("div","card-title","Selected result"));
+    const split=el("div","result-split");panel.appendChild(split);applyAllSplitRatios();
+    const top=el("section","card result-top");
+    const handle=el("div","splitter");
+    const bottomShell=el("div","result-bottom-shell");
+    const bottom=el("section","card result-bottom");
+    split.append(top,handle,bottomShell);bottomShell.appendChild(bottom);
+    top.appendChild(el("div","card-title","Rankings"));
+    bottom.appendChild(el("div","card-title","Selected result"));
+
     const tableWrap=el("div","table-scroll");top.appendChild(tableWrap);const table=el("table","results-table");tableWrap.appendChild(table);const hr=el("tr");for(const h of ["#","Roles by slot","Mean cleared","Median","P(target+)","XP/run","XP/hour","Run sec","Overrun"])hr.appendChild(el("th","",h));table.appendChild(hr);
-    data.results.forEach((res,idx)=>{const m=res.metrics;const tr=el("tr",idx===data.selected?"selected":"");const vals=[String(idx+1),res.roles.map((r,i)=>`${i+1}: ${r}`).join(" | "),fmt(m.mean_cleared,3),String(m.median_cleared),pct(m.target_probability),fmt(m.mean_xp_run,0),fmt(m.mean_xp_hour,0),fmt(m.mean_duration,1),pct(m.overrun_rate)];vals.forEach((v,i)=>tr.appendChild(el("td",i===1?"assignment":"",v)));tr.onclick=()=>{data.selected=idx;renderResultTab(data);};table.appendChild(tr);});
-    const detail=el("pre","result-detail");bottom.appendChild(detail);const actions=el("div","actions result-actions");bottom.appendChild(actions);const use=el("button","primary","Use selected roles in Experiment tab");const close=el("button","secondary","Close result tab");actions.append(close,use);use.onclick=()=>{const res=data.results[data.selected];res.roles.forEach((r,i)=>state.party[i].manual_role=r);saveStateNow();renderExperiment();selectTab("experiment");setStatus("Copied selected role assignment to the Experiment tab");};close.onclick=()=>closeResultTab(data.id);
+    const rows:HTMLTableRowElement[]=[];
+    const detail=el("pre","result-detail");bottom.appendChild(detail);
+    data.results.forEach((res,idx)=>{
+      const m=res.metrics;const tr=el("tr",idx===data.selected?"selected":"") as HTMLTableRowElement;
+      const vals=[String(idx+1),res.roles.map((r,i)=>`${i+1}: ${r}`).join(" | "),fmt(m.mean_cleared,3),String(m.median_cleared),pct(m.target_probability),fmt(m.mean_xp_run,0),fmt(m.mean_xp_hour,0),fmt(m.mean_duration,1),pct(m.overrun_rate)];
+      vals.forEach((v,i)=>tr.appendChild(el("td",i===1?"assignment":"",v)));
+      tr.onclick=()=>{data.selected=idx;rows.forEach((row,j)=>row.classList.toggle("selected",j===idx));updateResultDetail(detail,data.results[idx],data.snapshot);};
+      rows.push(tr);table.appendChild(tr);
+    });
+
+    const actions=el("div","actions result-actions");bottomShell.appendChild(actions);
+    const use=el("button","primary","Use selected roles in Experiment tab");
+    const close=el("button","secondary","Close result tab");
+    actions.append(close,use);
+    use.onclick=()=>{const res=data.results[data.selected];res.roles.forEach((r,i)=>state.party[i].manual_role=r);saveStateNow();renderExperiment();selectTab("experiment");setStatus("Copied selected role assignment to the Experiment tab");};
+    close.onclick=()=>closeResultTab(data.id);
     updateResultDetail(detail,data.results[data.selected],data.snapshot);
-    let dragging=false,startY=0,startRatio=state.settings.results_top_ratio;handle.onpointerdown=e=>{dragging=true;startY=e.clientY;startRatio=state.settings.results_top_ratio;handle.setPointerCapture(e.pointerId);};handle.onpointermove=e=>{if(!dragging)return;const rect=split.getBoundingClientRect();const ratio=Gauntlet.clamp(startRatio+(e.clientY-startY)/Math.max(1,rect.height),0.20,0.75);state.settings.results_top_ratio=ratio;applyAllSplitRatios();};handle.onpointerup=e=>{if(!dragging)return;dragging=false;try{handle.releasePointerCapture(e.pointerId);}catch{}saveStateNow();};
+
+    let dragging=false,startY=0,startRatio=state.settings.results_top_ratio;
+    handle.onpointerdown=e=>{dragging=true;startY=e.clientY;startRatio=state.settings.results_top_ratio;handle.setPointerCapture(e.pointerId);};
+    handle.onpointermove=e=>{if(!dragging)return;const rect=split.getBoundingClientRect();const ratio=Gauntlet.clamp(startRatio+(e.clientY-startY)/Math.max(1,rect.height),0.20,0.75);state.settings.results_top_ratio=ratio;applyAllSplitRatios();};
+    handle.onpointerup=e=>{if(!dragging)return;dragging=false;try{handle.releasePointerCapture(e.pointerId);}catch{}saveStateNow();};
   }
   function updateResultDetail(pre:HTMLElement,res:Gauntlet.CandidateResult,snap:Gauntlet.AppState):void{
     const m=res.metrics;const lines:string[]=["ROLE ASSIGNMENT","---------------"];res.roles.forEach((role,i)=>lines.push(`Slot ${String(i+1).padEnd(3)} ${snap.party[i].profile_name.padEnd(18)}  ${role}`));
@@ -324,8 +356,7 @@ namespace GauntletWeb {
     const waves=Object.keys(m.distribution).map(Number).sort((a,b)=>a-b);for(const w of waves){const count=m.distribution[w],bar="█".repeat(Math.min(50,Math.round(50*count/m.runs)));lines.push(`${String(w).padStart(3)}: ${(100*count/m.runs).toFixed(2).padStart(6)}%  ${bar}`);}pre.textContent=lines.join("\n");
   }
   function closeResultTab(id:string):void{resultTabs.delete(id);document.querySelector(`.tab-button[data-tab="${id}"]`)?.remove();document.querySelector(`.tab-panel[data-tab="${id}"]`)?.remove();if(activeTab===id)selectTab("experiment");}
-  function applySplitRatio(split:HTMLElement):void{split.style.setProperty("--result-top",`${state.settings.results_top_ratio*100}%`);}
-  function applyAllSplitRatios():void{document.querySelectorAll<HTMLElement>(".result-split").forEach(applySplitRatio);}
+  function applyAllSplitRatios():void{document.documentElement.style.setProperty("--result-top",`${state.settings.results_top_ratio*100}%`);}
 
   async function init():Promise<void>{
     try{await loadConfig();buildMenus();renderTabsBase();renderProfiles();renderExperiment();qs<HTMLButtonElement>("#global-cancel").onclick=cancelRun;selectTab("profiles");setStatus("Ready");}
