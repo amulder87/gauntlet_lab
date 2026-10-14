@@ -193,10 +193,9 @@ body {
 
 .experiment-layout {
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: minmax(620px, 2fr) minmax(420px, 1fr);
   gap: 16px;
-  width: fit-content;
-  max-width: 100%;
+  width: min(100%, 1220px);
   height: 100%;
   justify-content: start;
   align-items: start;
@@ -269,10 +268,13 @@ body {
 
 
 .party-card {
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
   align-self: start;
-  justify-self: start;
+}
+
+.experiment-layout > .card {
+  width: 100%;
 }
 
 .party-helper {
@@ -581,15 +583,10 @@ button:disabled {
   border-bottom: 1px solid #fda29b;
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1080px) {
   .experiment-layout {
     grid-template-columns: 1fr;
-    width: min(100%,840px);
-    max-width: 840px;
-  }
-
-  .party-card {
-    width: 100%;
+    width: min(100%, 820px);
   }
 }
 
