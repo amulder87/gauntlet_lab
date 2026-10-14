@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "none",
+    "outFile": "./tests/rng_probe.js",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ]
+  },
+  "files": [
+    "src/core.ts",
+    "tests/python_random_reference.ts",
+    "tests/rng_probe.ts"
+  ]
+}

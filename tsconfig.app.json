@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {"module": "none", "outFile": "./dist/app.js", "sourceMap": true, "lib": ["ES2020", "DOM"]},
+  "files": ["src/core.ts", "src/engine.ts", "src/optimizer.ts", "src/app.ts"]
+}

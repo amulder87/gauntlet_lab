@@ -1,0 +1,1539 @@
+{
+  "config_version": 3,
+  "defaults": {
+    "profiles": {
+      "Me": {
+        "name": "Me",
+        "movement_speed": 10.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Clone": {
+        "name": "Clone",
+        "movement_speed": 9.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Generic T0": {
+        "name": "Generic T0",
+        "movement_speed": 10.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Generic T1": {
+        "name": "Generic T1",
+        "movement_speed": 11.3,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Melee": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Ranged": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Magic": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Defense": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          }
+        }
+      },
+      "Generic T2": {
+        "name": "Generic T2",
+        "movement_speed": 12.8,
+        "backpack_size": 32,
+        "role_stats": {
+          "Health": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Melee": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Ranged": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Magic": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Defense": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          }
+        }
+      },
+      "Generic T3": {
+        "name": "Generic T3",
+        "movement_speed": 14.6,
+        "backpack_size": 32,
+        "role_stats": {
+          "Health": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Melee": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Ranged": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Magic": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Defense": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          }
+        }
+      },
+      "Generic T4": {
+        "name": "Generic T4",
+        "movement_speed": 16.5,
+        "backpack_size": 36,
+        "role_stats": {
+          "Health": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Melee": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Ranged": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Magic": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Defense": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          }
+        }
+      },
+      "Generic T5": {
+        "name": "Generic T5",
+        "movement_speed": 18.7,
+        "backpack_size": 36,
+        "role_stats": {
+          "Health": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Melee": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Ranged": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Magic": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Defense": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          }
+        }
+      },
+      "Generic T6": {
+        "name": "Generic T6",
+        "movement_speed": 21.2,
+        "backpack_size": 40,
+        "role_stats": {
+          "Health": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Melee": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Ranged": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Magic": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Defense": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          }
+        }
+      },
+      "Generic T7": {
+        "name": "Generic T7",
+        "movement_speed": 24.0,
+        "backpack_size": 40,
+        "role_stats": {
+          "Health": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Melee": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Ranged": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Magic": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Defense": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          }
+        }
+      },
+      "Generic T8": {
+        "name": "Generic T8",
+        "movement_speed": 27.2,
+        "backpack_size": 44,
+        "role_stats": {
+          "Health": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Melee": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Ranged": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Magic": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Defense": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          }
+        }
+      },
+      "Generic T9": {
+        "name": "Generic T9",
+        "movement_speed": 30.9,
+        "backpack_size": 44,
+        "role_stats": {
+          "Health": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Melee": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Ranged": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Magic": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Defense": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          }
+        }
+      },
+      "Generic T10": {
+        "name": "Generic T10",
+        "movement_speed": 35.0,
+        "backpack_size": 48,
+        "role_stats": {
+          "Health": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Melee": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Ranged": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Magic": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Defense": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          }
+        }
+      },
+      "Generic T11": {
+        "name": "Generic T11",
+        "movement_speed": 50.0,
+        "backpack_size": 56,
+        "role_stats": {
+          "Health": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Melee": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Ranged": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Magic": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Defense": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          }
+        }
+      }
+    },
+    "party": [
+      {
+        "label": "Slot 1",
+        "profile_name": "Me",
+        "is_real_player": true,
+        "manual_role": "Health"
+      },
+      {
+        "label": "Slot 2",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Melee"
+      },
+      {
+        "label": "Slot 3",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Ranged"
+      },
+      {
+        "label": "Slot 4",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Magic"
+      },
+      {
+        "label": "Slot 5",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Defense"
+      }
+    ],
+    "game": {
+      "fortress_node_distance": 255.0,
+      "gather_process_distance": 100.0,
+      "prep_seconds": 120.0,
+      "wave_interval": 20.0,
+      "combat_interval": 1.5,
+      "starting_stat": 10.0,
+      "incoming_constant": 425.0,
+      "outgoing_constant": 600.0,
+      "lane_noise_per_wave": 0.0155,
+      "lane_noise_cap": 0.9,
+      "use_lane_noise": true,
+      "health_base": 32.0,
+      "health_growth": 1.039,
+      "health_milestone_mult": 1.55,
+      "health_milestone_every": 20,
+      "attack_growth": 1.06,
+      "defense_per_wave": 1.5,
+      "action_xp_base": 1.0,
+      "action_xp_wave_slope": 0.36,
+      "failure_xp_mult": 0.25,
+      "completion_xp_power": 2.0,
+      "material_values": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        12,
+        16,
+        22,
+        30,
+        40
+      ],
+      "max_wave": 160
+    },
+    "optimizer": {
+      "objective": "XP / hour",
+      "target_wave": 30,
+      "pre_screen_runs": 2,
+      "pre_screen_filter": 0.75,
+      "screening_runs": 100,
+      "finalist_runs": 3000,
+      "finalist_count": 8,
+      "seed": 12345,
+      "require_health": true,
+      "require_force": true
+    },
+    "settings": {
+      "clone_speed_multiplier": 0.9,
+      "simulation_batch_size": 100,
+      "run_presets": {
+        "Fast": {
+          "pre_screen_runs": 1,
+          "screening_runs": 50,
+          "finalist_runs": 1000,
+          "finalist_count": 6
+        },
+        "Standard": {
+          "pre_screen_runs": 2,
+          "screening_runs": 100,
+          "finalist_runs": 3000,
+          "finalist_count": 8
+        },
+        "Precise": {
+          "pre_screen_runs": 5,
+          "screening_runs": 500,
+          "finalist_runs": 20000,
+          "finalist_count": 12
+        }
+      },
+      "results_top_ratio": 0.34
+    }
+  },
+  "current": {
+    "profiles": {
+      "Me": {
+        "name": "Me",
+        "movement_speed": 10.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Clone": {
+        "name": "Clone",
+        "movement_speed": 9.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Generic T0": {
+        "name": "Generic T0",
+        "movement_speed": 10.0,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Melee": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Ranged": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Magic": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          },
+          "Defense": {
+            "tier": 0,
+            "gather_time": 1.0,
+            "gather_success": 0.75,
+            "double_gather": 0.0,
+            "process_time": 1.0,
+            "process_success": 0.75
+          }
+        }
+      },
+      "Generic T1": {
+        "name": "Generic T1",
+        "movement_speed": 11.3,
+        "backpack_size": 28,
+        "role_stats": {
+          "Health": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Melee": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Ranged": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Magic": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          },
+          "Defense": {
+            "tier": 1,
+            "gather_time": 0.965,
+            "gather_success": 0.775,
+            "double_gather": 0.03,
+            "process_time": 0.965,
+            "process_success": 0.775
+          }
+        }
+      },
+      "Generic T2": {
+        "name": "Generic T2",
+        "movement_speed": 12.8,
+        "backpack_size": 32,
+        "role_stats": {
+          "Health": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Melee": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Ranged": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Magic": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          },
+          "Defense": {
+            "tier": 2,
+            "gather_time": 0.93,
+            "gather_success": 0.8,
+            "double_gather": 0.06,
+            "process_time": 0.93,
+            "process_success": 0.8
+          }
+        }
+      },
+      "Generic T3": {
+        "name": "Generic T3",
+        "movement_speed": 14.6,
+        "backpack_size": 32,
+        "role_stats": {
+          "Health": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Melee": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Ranged": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Magic": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          },
+          "Defense": {
+            "tier": 3,
+            "gather_time": 0.895,
+            "gather_success": 0.825,
+            "double_gather": 0.09,
+            "process_time": 0.895,
+            "process_success": 0.825
+          }
+        }
+      },
+      "Generic T4": {
+        "name": "Generic T4",
+        "movement_speed": 16.5,
+        "backpack_size": 36,
+        "role_stats": {
+          "Health": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Melee": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Ranged": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Magic": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          },
+          "Defense": {
+            "tier": 4,
+            "gather_time": 0.86,
+            "gather_success": 0.85,
+            "double_gather": 0.12,
+            "process_time": 0.86,
+            "process_success": 0.85
+          }
+        }
+      },
+      "Generic T5": {
+        "name": "Generic T5",
+        "movement_speed": 18.7,
+        "backpack_size": 36,
+        "role_stats": {
+          "Health": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Melee": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Ranged": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Magic": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          },
+          "Defense": {
+            "tier": 5,
+            "gather_time": 0.825,
+            "gather_success": 0.875,
+            "double_gather": 0.15,
+            "process_time": 0.825,
+            "process_success": 0.875
+          }
+        }
+      },
+      "Generic T6": {
+        "name": "Generic T6",
+        "movement_speed": 21.2,
+        "backpack_size": 40,
+        "role_stats": {
+          "Health": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Melee": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Ranged": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Magic": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          },
+          "Defense": {
+            "tier": 6,
+            "gather_time": 0.79,
+            "gather_success": 0.9,
+            "double_gather": 0.18,
+            "process_time": 0.79,
+            "process_success": 0.9
+          }
+        }
+      },
+      "Generic T7": {
+        "name": "Generic T7",
+        "movement_speed": 24.0,
+        "backpack_size": 40,
+        "role_stats": {
+          "Health": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Melee": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Ranged": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Magic": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          },
+          "Defense": {
+            "tier": 7,
+            "gather_time": 0.755,
+            "gather_success": 0.925,
+            "double_gather": 0.21,
+            "process_time": 0.755,
+            "process_success": 0.925
+          }
+        }
+      },
+      "Generic T8": {
+        "name": "Generic T8",
+        "movement_speed": 27.2,
+        "backpack_size": 44,
+        "role_stats": {
+          "Health": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Melee": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Ranged": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Magic": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          },
+          "Defense": {
+            "tier": 8,
+            "gather_time": 0.72,
+            "gather_success": 0.95,
+            "double_gather": 0.24,
+            "process_time": 0.72,
+            "process_success": 0.95
+          }
+        }
+      },
+      "Generic T9": {
+        "name": "Generic T9",
+        "movement_speed": 30.9,
+        "backpack_size": 44,
+        "role_stats": {
+          "Health": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Melee": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Ranged": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Magic": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          },
+          "Defense": {
+            "tier": 9,
+            "gather_time": 0.685,
+            "gather_success": 0.975,
+            "double_gather": 0.27,
+            "process_time": 0.685,
+            "process_success": 0.975
+          }
+        }
+      },
+      "Generic T10": {
+        "name": "Generic T10",
+        "movement_speed": 35.0,
+        "backpack_size": 48,
+        "role_stats": {
+          "Health": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Melee": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Ranged": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Magic": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          },
+          "Defense": {
+            "tier": 10,
+            "gather_time": 0.65,
+            "gather_success": 1.0,
+            "double_gather": 0.3,
+            "process_time": 0.65,
+            "process_success": 1.0
+          }
+        }
+      },
+      "Generic T11": {
+        "name": "Generic T11",
+        "movement_speed": 50.0,
+        "backpack_size": 56,
+        "role_stats": {
+          "Health": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Melee": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Ranged": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Magic": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          },
+          "Defense": {
+            "tier": 10,
+            "gather_time": 0.2,
+            "gather_success": 1.0,
+            "double_gather": 0.5,
+            "process_time": 0.2,
+            "process_success": 1.0
+          }
+        }
+      }
+    },
+    "party": [
+      {
+        "label": "Slot 1",
+        "profile_name": "Me",
+        "is_real_player": true,
+        "manual_role": "Health"
+      },
+      {
+        "label": "Slot 2",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Melee"
+      },
+      {
+        "label": "Slot 3",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Ranged"
+      },
+      {
+        "label": "Slot 4",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Magic"
+      },
+      {
+        "label": "Slot 5",
+        "profile_name": "Clone",
+        "is_real_player": false,
+        "manual_role": "Defense"
+      }
+    ],
+    "game": {
+      "fortress_node_distance": 255.0,
+      "gather_process_distance": 100.0,
+      "prep_seconds": 120.0,
+      "wave_interval": 20.0,
+      "combat_interval": 1.5,
+      "starting_stat": 10.0,
+      "incoming_constant": 425.0,
+      "outgoing_constant": 600.0,
+      "lane_noise_per_wave": 0.0155,
+      "lane_noise_cap": 0.9,
+      "use_lane_noise": true,
+      "health_base": 32.0,
+      "health_growth": 1.039,
+      "health_milestone_mult": 1.55,
+      "health_milestone_every": 20,
+      "attack_growth": 1.06,
+      "defense_per_wave": 1.5,
+      "action_xp_base": 1.0,
+      "action_xp_wave_slope": 0.36,
+      "failure_xp_mult": 0.25,
+      "completion_xp_power": 2.0,
+      "material_values": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        12,
+        16,
+        22,
+        30,
+        40
+      ],
+      "max_wave": 160
+    },
+    "optimizer": {
+      "objective": "XP / hour",
+      "target_wave": 30,
+      "pre_screen_runs": 2,
+      "pre_screen_filter": 0.75,
+      "screening_runs": 100,
+      "finalist_runs": 3000,
+      "finalist_count": 8,
+      "seed": 12345,
+      "require_health": true,
+      "require_force": true
+    },
+    "settings": {
+      "clone_speed_multiplier": 0.9,
+      "simulation_batch_size": 100,
+      "run_presets": {
+        "Fast": {
+          "pre_screen_runs": 1,
+          "screening_runs": 50,
+          "finalist_runs": 1000,
+          "finalist_count": 6
+        },
+        "Standard": {
+          "pre_screen_runs": 2,
+          "screening_runs": 100,
+          "finalist_runs": 3000,
+          "finalist_count": 8
+        },
+        "Precise": {
+          "pre_screen_runs": 5,
+          "screening_runs": 500,
+          "finalist_runs": 20000,
+          "finalist_count": 12
+        }
+      },
+      "results_top_ratio": 0.34
+    }
+  }
+}

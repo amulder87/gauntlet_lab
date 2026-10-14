@@ -1,0 +1,15 @@
+{
+  "name": "gauntlet-lab-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Client-side Gauntlet raid simulator and optimizer",
+  "scripts": {
+    "build": "tsc -p tsconfig.app.json && tsc -p tsconfig.worker.json && node tools/copy-public.mjs",
+    "test:reference": "tsc -p tsconfig.test.json && node tests/engine_probe.js",
+    "test:optimizer": "tsc -p tsconfig.optprobe.json && node tests/optimizer_probe.js",
+    "test:stats": "tsc -p tsconfig.stats.json && node tests/stat_compare.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

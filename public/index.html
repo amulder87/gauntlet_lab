@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gauntlet Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="boot-error" class="boot-error" hidden></div>
+  <header class="app-header">
+    <div class="brand">Gauntlet Lab</div>
+    <nav class="menu-bar">
+      <div class="menu-wrap"><button id="file-menu-button" class="menu-button">File</button><div id="file-menu" class="menu-popover" hidden><button id="restore-all">Restore factory defaults</button><button id="show-game-model">Show Game Model</button></div></div>
+      <div class="menu-wrap"><button id="help-menu-button" class="menu-button">Help</button><div id="help-menu" class="menu-popover" hidden><button id="about">About</button></div></div>
+    </nav>
+  </header>
+  <div class="app-shell">
+    <div id="tabs" class="tabs"></div>
+    <div id="panels" class="panels">
+      <main id="profiles-panel" class="tab-panel" data-tab="profiles"></main>
+      <main id="experiment-panel" class="tab-panel" data-tab="experiment" hidden></main>
+      <main id="game-panel" class="tab-panel" data-tab="game" hidden></main>
+    </div>
+  </div>
+  <footer class="status-bar"><span id="status-text">Starting…</span><button id="global-cancel" class="secondary small" disabled>Cancel</button><progress id="progress" max="1" value="0"></progress></footer>
+  <script src="app.js"></script>
+</body>
+</html>

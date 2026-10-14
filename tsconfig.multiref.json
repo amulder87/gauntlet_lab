@@ -1,0 +1,5 @@
+{
+  "extends":"./tsconfig.base.json",
+  "compilerOptions":{"module":"none","outFile":"./tests/multiscenario_reference_probe.js","lib":["ES2020","DOM"]},
+  "files":["src/core.ts","src/engine.ts","tests/python_random_reference.ts","tests/multiscenario_reference_probe.ts"]
+}

@@ -1,0 +1,5 @@
+{
+  "extends":"./tsconfig.base.json",
+  "compilerOptions":{"module":"none","outFile":"./tests/optimizer_probe.js","lib":["ES2020","DOM"]},
+  "files":["src/core.ts","src/engine.ts","src/optimizer.ts","tests/optimizer_probe.ts"]
+}
