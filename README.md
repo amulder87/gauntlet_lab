@@ -33,7 +33,7 @@ Each profile can have its own:
 - process success chance
 - double-gather chance
 
-Gauntlet Lab includes generic profiles from **T0 through T11** that can be used directly or as starting points for custom profiles.
+Gauntlet Lab includes generic profiles from **T0 through T10** that can be used directly or as starting points for custom profiles. "T11" is a T10 profile with near maxed-out stats.
 
 The built-in `Me` profile is intended for your own character.
 
