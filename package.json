@@ -1,6 +1,6 @@
 {
   "name": "gauntlet-lab-web",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "private": true,
   "description": "Client-side Gauntlet raid simulator and optimizer",
   "scripts": {
