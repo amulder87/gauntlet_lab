@@ -134,7 +134,14 @@ namespace GauntletWeb {
     const list=el("select","profile-list") as HTMLSelectElement; list.size=18;
     for(const name of profileNames()){const o=el("option") as HTMLOptionElement;o.value=name;o.textContent=name;o.selected=name===selectedProfile;list.appendChild(o);}
     sidebar.appendChild(list);
-    list.onchange=()=>{selectedProfile=list.value;renderProfiles();};
+    list.onchange=()=>{
+      selectedProfile=list.value;
+      renderProfiles();
+      requestAnimationFrame(()=>{
+        const nextList=document.querySelector<HTMLSelectElement>("#profiles-panel .profile-list");
+        nextList?.focus({preventScroll:true});
+      });
+    };
     const newBtn=el("button","secondary","New generic tier…");
     const dupBtn=el("button","secondary","Duplicate selected");
     const delBtn=el("button","secondary","Delete selected");
