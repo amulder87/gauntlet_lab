@@ -10,6 +10,7 @@ namespace GauntletWeb {
   let selectedProfile = "Me";
   let activeTab = "profiles";
   let gameTabVisible = false;
+  let helpTabVisible = false;
   let resultsCounter = 0;
   let running: BrowserSimulationRunner | null = null;
   let debounceTimer: number | undefined;
@@ -93,6 +94,7 @@ namespace GauntletWeb {
       renderProfiles(); renderExperiment(); if (gameTabVisible) renderGameModel(); setStatus("Restored factory defaults");
     };
     qs<HTMLButtonElement>("#show-game-model").onclick = () => showGameModel();
+    qs<HTMLButtonElement>("#user-guide").onclick = () => showHelp();
     qs<HTMLButtonElement>("#about").onclick = () => alert(`Gauntlet Lab Web ${VERSION}\n\nMonte Carlo raid composition and Fortify XP optimizer.\nAll simulations and profile data stay in your browser.`);
   }
 
@@ -183,10 +185,13 @@ namespace GauntletWeb {
       const arr:HTMLInputElement[]=[];
       vals.forEach((v,i)=>{const td=el("td");const inp=el("input","input compact") as HTMLInputElement;inp.type="number";inp.value=v;inp.disabled=readonly;inp.step=i===0?"1":"any";td.appendChild(inp);tr.appendChild(td);arr.push(inp);});body.appendChild(tr);roleInputs.set(role,arr);
     }
-    const actions=el("div","actions");fields.appendChild(actions);
+    const footer=el("div","helper-actions");fields.appendChild(footer);
+    const helper=readonly
+      ? el("p","muted","Clone is synchronized automatically from Me. All stats match Me except movement speed, which is 90% of Me and rounded to one decimal place.")
+      : el("p","muted","Success and double-gather fields are percentages in the UI. Changes are saved in this browser when applied.");
+    footer.appendChild(helper);
+    const actions=el("div","actions");footer.appendChild(actions);
     const apply=el("button","primary","Apply profile changes");apply.disabled=readonly;actions.appendChild(apply);
-    if(readonly) editor.appendChild(el("p","muted","Clone is synchronized automatically from Me. All stats match Me except movement speed, which is 90% of Me and rounded to one decimal place."));
-    else editor.appendChild(el("p","muted","Success and double-gather fields are percentages in the UI. Changes are saved in this browser when applied."));
     apply.onclick=()=>{
       try{
         const old=selectedProfile;let newName=nameInput.value.trim();if(!newName)throw new Error("Name cannot be empty");if(newName!==old&&state.profiles[newName])throw new Error("A profile with that name already exists");
@@ -214,8 +219,9 @@ namespace GauntletWeb {
       const rtd=el("td");const rs=roleSelect(slot.manual_role);rtd.appendChild(rs);tr.appendChild(rtd);table.appendChild(tr);
       ps.onchange=()=>{slot.profile_name=ps.value;saveStateNow();};rs.onchange=()=>{slot.manual_role=rs.value as Gauntlet.Role;saveStateNow();};
     }
-    party.appendChild(el("p","muted","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
-    const runActions=el("div","actions");party.appendChild(runActions);
+    const partyFooter=el("div","helper-actions experiment-actions");party.appendChild(partyFooter);
+    partyFooter.appendChild(el("p","muted","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
+    const runActions=el("div","actions");partyFooter.appendChild(runActions);
     const sim=el("button","primary","Simulate current roles");const opt=el("button","primary","Optimize all role assignments");const cancel=el("button","secondary","Cancel");cancel.disabled=!running;runActions.append(sim,opt,cancel);
     sim.disabled=!!running;opt.disabled=!!running;
     sim.onclick=()=>simulateCurrent();opt.onclick=()=>optimizeCurrent();cancel.onclick=()=>cancelRun();
@@ -244,6 +250,124 @@ namespace GauntletWeb {
     gameTabVisible=true;addTabButton("game","Game model",true);renderGameModel();selectTab("game");setStatus("Opened Game model");
   }
   function closeGameModel():void{gameTabVisible=false;document.querySelector('.tab-button[data-tab="game"]')?.remove();qs<HTMLElement>("#game-panel").hidden=true;selectTab("experiment");setStatus("Closed Game model");}
+
+  function showHelp():void{
+    helpTabVisible=true;
+    const btn=addTabButton("help","Help",true);
+    const bar=qs<HTMLElement>("#tabs");
+    const gameBtn=bar.querySelector<HTMLElement>('.tab-button[data-tab="game"]');
+    const firstResult=bar.querySelector<HTMLElement>('.tab-button[data-tab^="results-"]');
+    const before=gameBtn||firstResult;
+    if(before&&before!==btn)bar.insertBefore(btn,before);
+    renderHelp();
+    selectTab("help");
+    setStatus("Opened help");
+  }
+
+  function closeHelp():void{
+    helpTabVisible=false;
+    document.querySelector('.tab-button[data-tab="help"]')?.remove();
+    document.querySelector('.tab-panel[data-tab="help"]')?.remove();
+    selectTab("experiment");
+    setStatus("Closed help");
+  }
+
+  function renderHelp():void{
+    let panel=document.querySelector<HTMLElement>('.tab-panel[data-tab="help"]');
+    if(!panel){panel=el("main","tab-panel help-panel");panel.dataset.tab="help";qs("#panels").appendChild(panel);}
+    panel.innerHTML=`
+      <article class="help-content">
+        <header class="help-hero">
+          <h1>Gauntlet Lab</h1>
+          <p>Gauntlet Lab is a browser-based simulator and strategy optimizer for the <strong>Gauntlet</strong> minigame in ScapeWatch. It helps compare fixed-role raid compositions, estimate wave progression, and optimize Fortify XP.</p>
+        </header>
+
+        <nav class="help-toc" aria-label="Help topics">
+          <a href="#help-quick-start">Quick start</a>
+          <a href="#help-profiles">Profiles</a>
+          <a href="#help-experiment">Experiment</a>
+          <a href="#help-results">Results</a>
+          <a href="#help-simulation">Simulation model</a>
+          <a href="#help-xp">Fortify XP</a>
+          <a href="#help-game-model">Game Model</a>
+          <a href="#help-privacy">Privacy & accuracy</a>
+        </nav>
+
+        <section id="help-quick-start">
+          <h2>Quick start</h2>
+          <ol>
+            <li>Edit <strong>Me</strong> in Profiles to match your character.</li>
+            <li>Choose the five raid participants in Experiment. Slot 1 is the character whose Fortify XP is tracked.</li>
+            <li>Pick an objective such as mean wave, target-wave probability, XP/run, or XP/hour.</li>
+            <li>Either simulate the current roles or optimize all fixed-role assignments.</li>
+            <li>Compare completed runs in separate Results tabs.</li>
+          </ol>
+        </section>
+
+        <section id="help-profiles">
+          <h2>Profiles</h2>
+          <p>A profile describes one player or stand-in. Each profile can have its own movement speed, backpack size, role tiers, gather/process times, success chances, and per-role double-gather chance.</p>
+          <p>Generic T0 through T11 profiles are included as convenient starting points. The built-in <strong>Clone</strong> automatically follows <strong>Me</strong>, except its movement speed is 90% of Me's speed.</p>
+        </section>
+
+        <section id="help-experiment">
+          <h2>Experiment</h2>
+          <p>The Experiment tab defines the five participants in the raid and the optimization target. Slot 1 is special only for XP calculations: put the profile whose Fortify XP you care about there.</p>
+          <p>The optimizer uses three stages. A tiny pre-screen removes clearly weak assignments, screening gives the survivors more runs, and the finalists receive the largest sample. Fast, Standard, and Precise presets control the amount of work.</p>
+        </section>
+
+        <section id="help-results">
+          <h2>Results</h2>
+          <p>Each completed simulation or optimization opens in its own Results tab so you can change inputs and compare experiments side by side.</p>
+          <p>Results include mean and median highest wave cleared, target-wave probability, Fortify XP per run and per hour, average duration, overrun rate, role assignments, and the wave-clear distribution.</p>
+          <p><strong>Use selected roles in Experiment tab</strong> copies a ranked composition back into the current experiment for follow-up testing.</p>
+        </section>
+
+        <section id="help-simulation">
+          <h2>How the simulation works</h2>
+          <h3>Resource loops</h3>
+          <p>Players walk from the fortress to a gathering node, gather until the backpack is full, walk to processing, attempt to process each raw resource once, then return to the fortress and deposit the processed resources into their assigned army stat.</p>
+          <p>Gather failures consume time but produce nothing. Successful double gathers produce two resources when backpack space allows. Failed processing attempts lose the raw resource.</p>
+
+          <h3>Waves and combat</h3>
+          <p>The raid has a two-minute preparation period before Wave 1. After that, waves arrive on a fixed global 20-second clock. Combat occurs every 1.5 seconds, with the first hit 1.5 seconds after a wave arrives. Killing a wave does not reset the global wave clock.</p>
+          <p>Enemy damage resolves first. If the army dies to that hit, the player army does not attack on that combat round.</p>
+
+          <h3>Wave stacking</h3>
+          <p>If a new wave arrives while the current wave is still alive, the waves merge. Remaining HP and Force are added together, while Defense becomes the newly arriving wave's Defense. The entire merged stack must be killed. If another wave arrives before that happens, the raid is overrun.</p>
+          <p>Incoming stacked waves do not count as cleared waves; only fully defeated waves count toward the final result.</p>
+
+          <h3>Enemy Force and damage</h3>
+          <p>Enemy total Force can be split between Melee, Ranged, and Magic with bounded random variation. This matters for asymmetric parties because each incoming lane is mitigated by army Defense plus the matching Force stat.</p>
+          <p>Outgoing player damage uses total player Force and enemy Defense. Incoming damage is calculated lane-by-lane, summed, then floored. The editable Game Model contains the currently assumed combat constants.</p>
+        </section>
+
+        <section id="help-xp">
+          <h2>Fortify XP</h2>
+          <p>Each gather or process action earns Fortify XP based on the wave active when the action happens. Successful actions earn full action XP; failed actions earn a reduced amount. The raid also awards a completion bonus based on the highest wave actually cleared.</p>
+          <p>Because XP per action increases with wave depth, the best XP/hour setup can differ from the composition that reaches the highest average wave.</p>
+        </section>
+
+        <section id="help-game-model">
+          <h2>Game Model</h2>
+          <p>Most players should not need to change the underlying model. Use <strong>File → Show Game Model</strong> if you want to run sensitivity tests or adjust mechanics as new information becomes available.</p>
+          <p>The model includes node distances, wave/combat timing, starting stats, mitigation constants, enemy scaling, lane variation, XP formulas, material values, and other simulation assumptions. Game Model defaults can be restored without resetting your profiles.</p>
+        </section>
+
+        <section id="help-privacy">
+          <h2>Saving, privacy, and accuracy</h2>
+          <p>Profiles, experiment settings, Game Model changes, and UI preferences are stored locally in your browser. Gauntlet Lab does not require a ScapeWatch login or upload your character profiles or simulation results.</p>
+          <p>Gauntlet Lab is an unofficial community simulator. Some mechanics are documented directly and others are inferred or calibrated from observed gameplay. It is generally most useful for comparing strategies rather than treating any single probability as an exact prediction.</p>
+          <p>If real gameplay repeatedly disagrees with the simulator, concrete observations such as player stats, enemy Force/Defense, damage taken or dealt, wave timing, and stacking behavior are especially useful for refining the model.</p>
+        </section>
+
+        <footer class="help-footer">
+          <p>Gauntlet Lab is an unofficial community project and is not affiliated with or endorsed by ScapeWatch.</p>
+          <button id="close-help" class="secondary">Close Help</button>
+        </footer>
+      </article>`;
+    qs<HTMLButtonElement>("#close-help").onclick=closeHelp;
+  }
 
   function renderGameModel(): void {
     const panel=qs<HTMLElement>("#game-panel");panel.innerHTML="";panel.dataset.tab="game";
