@@ -3,6 +3,7 @@
 /// <reference path="./optimizer.ts" />
 namespace GauntletWeb {
   const STORAGE_KEY = "gauntlet-lab-web-current-v3";
+  const HELP_DISMISSED_KEY = "gauntlet-lab-web-help-dismissed-v1";
   const VERSION = "0.2.2";
   let factoryDoc: Gauntlet.ConfigDocument;
   let factoryState: Gauntlet.AppState;
@@ -11,6 +12,7 @@ namespace GauntletWeb {
   let activeTab = "profiles";
   let gameTabVisible = false;
   let helpTabVisible = false;
+  let helpReturnTab = "profiles";
   let resultsCounter = 0;
   let running: BrowserSimulationRunner | null = null;
   let debounceTimer: number | undefined;
@@ -99,16 +101,31 @@ namespace GauntletWeb {
     qs<HTMLButtonElement>("#about").onclick = () => alert(`Gauntlet Lab Web ${VERSION}\n\nMonte Carlo raid composition and Fortify XP optimizer.\nAll simulations and profile data stay in your browser.`);
   }
 
-  function addTabButton(id: string, label: string, insertBeforeResults=false): HTMLButtonElement {
+  function addTabButton(id: string, label: string, insertBeforeResults=false, onClose?:()=>void): HTMLButtonElement {
     let btn = document.querySelector<HTMLButtonElement>(`.tab-button[data-tab="${id}"]`);
     if (btn) return btn;
-    btn = el("button","tab-button",label);
-    btn.dataset.tab=id; btn.onclick=()=>selectTab(id);
+
+    const item=el("div",onClose?"tab-item closable":"tab-item");
+    item.dataset.tab=id;
+    btn=el("button","tab-button",label);
+    btn.dataset.tab=id;
+    btn.onclick=()=>selectTab(id);
+    item.appendChild(btn);
+
+    if(onClose){
+      const close=el("button","tab-close","×");
+      close.type="button";
+      close.title=`Close ${label}`;
+      close.setAttribute("aria-label",`Close ${label}`);
+      close.onclick=e=>{e.stopPropagation();onClose();};
+      item.appendChild(close);
+    }
+
     const bar=qs<HTMLElement>("#tabs");
     if (insertBeforeResults) {
-      const firstResult=bar.querySelector('.tab-button[data-tab^="results-"]');
-      if(firstResult) bar.insertBefore(btn,firstResult); else bar.appendChild(btn);
-    } else bar.appendChild(btn);
+      const firstResult=bar.querySelector('.tab-item[data-tab^="results-"]');
+      if(firstResult) bar.insertBefore(item,firstResult); else bar.appendChild(item);
+    } else bar.appendChild(item);
     return btn;
   }
 
@@ -116,6 +133,7 @@ namespace GauntletWeb {
     activeTab=id;
     document.querySelectorAll<HTMLElement>(".tab-panel").forEach(p=>p.hidden=p.dataset.tab!==id);
     document.querySelectorAll<HTMLElement>(".tab-button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+    document.querySelectorAll<HTMLElement>(".tab-item").forEach(item=>item.classList.toggle("active",item.dataset.tab===id));
   }
 
   function renderTabsBase(): void {
@@ -211,7 +229,8 @@ namespace GauntletWeb {
   function renderExperiment(): void {
     const panel=qs<HTMLElement>("#experiment-panel");panel.innerHTML="";
     const layout=el("div","experiment-layout");panel.appendChild(layout);
-    const party=el("section","card");layout.appendChild(party);party.appendChild(el("div","card-title","Party"));
+    const party=el("section","card party-card");layout.appendChild(party);party.appendChild(el("div","card-title","Party"));
+    party.appendChild(el("p","muted party-helper","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
     const table=el("table","party-table");party.appendChild(table);const head=el("tr");["Slot","Profile","Current role"].forEach(h=>head.appendChild(el("th","",h)));table.appendChild(head);
     const names=profileNames();
     for(let i=0;i<5;i++){
@@ -220,9 +239,7 @@ namespace GauntletWeb {
       const rtd=el("td");const rs=roleSelect(slot.manual_role);rtd.appendChild(rs);tr.appendChild(rtd);table.appendChild(tr);
       ps.onchange=()=>{slot.profile_name=ps.value;saveStateNow();};rs.onchange=()=>{slot.manual_role=rs.value as Gauntlet.Role;saveStateNow();};
     }
-    const partyFooter=el("div","helper-actions experiment-actions");party.appendChild(partyFooter);
-    partyFooter.appendChild(el("p","muted","Slot 1 is used for Fortify XP calculations. Identical stand-ins are automatically deduplicated during optimization."));
-    const runActions=el("div","actions");partyFooter.appendChild(runActions);
+    const runActions=el("div","actions party-run-actions");party.appendChild(runActions);
     const sim=el("button","primary","Simulate current roles");const opt=el("button","primary","Optimize all role assignments");const cancel=el("button","secondary","Cancel");cancel.disabled=!running;runActions.append(sim,opt,cancel);
     sim.disabled=!!running;opt.disabled=!!running;
     sim.onclick=()=>simulateCurrent();opt.onclick=()=>optimizeCurrent();cancel.onclick=()=>cancelRun();
@@ -248,18 +265,20 @@ namespace GauntletWeb {
   function checkbox(label:string,checked:boolean):{wrap:HTMLElement,input:HTMLInputElement}{const wrap=el("label","check");const input=el("input") as HTMLInputElement;input.type="checkbox";input.checked=checked;wrap.append(input,document.createTextNode(label));return{wrap,input};}
 
   function showGameModel(): void {
-    gameTabVisible=true;addTabButton("game","Game model",true);renderGameModel();selectTab("game");setStatus("Opened Game model");
+    gameTabVisible=true;addTabButton("game","Game model",true,closeGameModel);renderGameModel();selectTab("game");setStatus("Opened Game model");
   }
-  function closeGameModel():void{gameTabVisible=false;document.querySelector('.tab-button[data-tab="game"]')?.remove();qs<HTMLElement>("#game-panel").hidden=true;selectTab("experiment");setStatus("Closed Game model");}
+  function closeGameModel():void{gameTabVisible=false;document.querySelector('.tab-item[data-tab="game"]')?.remove();qs<HTMLElement>("#game-panel").hidden=true;selectTab("experiment");setStatus("Closed Game model");}
 
   function showHelp():void{
+    if (activeTab !== "help") helpReturnTab = activeTab || "profiles";
     helpTabVisible=true;
-    const btn=addTabButton("help","Help",true);
+    const btn=addTabButton("help","Help",true,closeHelp);
     const bar=qs<HTMLElement>("#tabs");
-    const gameBtn=bar.querySelector<HTMLElement>('.tab-button[data-tab="game"]');
-    const firstResult=bar.querySelector<HTMLElement>('.tab-button[data-tab^="results-"]');
-    const before=gameBtn||firstResult;
-    if(before&&before!==btn)bar.insertBefore(btn,before);
+    const helpItem=btn.closest<HTMLElement>(".tab-item")!;
+    const gameItem=bar.querySelector<HTMLElement>('.tab-item[data-tab="game"]');
+    const firstResult=bar.querySelector<HTMLElement>('.tab-item[data-tab^="results-"]');
+    const before=gameItem||firstResult;
+    if(before&&before!==helpItem)bar.insertBefore(helpItem,before);
     renderHelp();
     selectTab("help");
     setStatus("Opened help");
@@ -267,9 +286,11 @@ namespace GauntletWeb {
 
   function closeHelp():void{
     helpTabVisible=false;
-    document.querySelector('.tab-button[data-tab="help"]')?.remove();
+    localStorage.setItem(HELP_DISMISSED_KEY,"1");
+    document.querySelector('.tab-item[data-tab="help"]')?.remove();
     document.querySelector('.tab-panel[data-tab="help"]')?.remove();
-    selectTab("experiment");
+    const returnTab=document.querySelector(`.tab-button[data-tab="${helpReturnTab}"]`) ? helpReturnTab : "profiles";
+    selectTab(returnTab);
     setStatus("Closed help");
   }
 
@@ -446,7 +467,7 @@ namespace GauntletWeb {
   }
 
   function createResultsTab(results:Gauntlet.CandidateResult[],snapshot:Gauntlet.AppState):void{
-    const id=`results-${++resultsCounter}`;const data:ResultTabData={id,label:`Results ${resultsCounter}`,results,snapshot,selected:0};resultTabs.set(id,data);addTabButton(id,data.label);renderResultTab(data);selectTab(id);
+    const id=`results-${++resultsCounter}`;const data:ResultTabData={id,label:`Results ${resultsCounter}`,results,snapshot,selected:0};resultTabs.set(id,data);addTabButton(id,data.label,false,()=>closeResultTab(id));renderResultTab(data);selectTab(id);
   }
   function renderResultTab(data:ResultTabData):void{
     let panel=document.querySelector<HTMLElement>(`.tab-panel[data-tab="${data.id}"]`);if(!panel){panel=el("main","tab-panel result-panel");panel.dataset.tab=data.id;qs("#panels").appendChild(panel);}panel.innerHTML="";
@@ -489,18 +510,28 @@ namespace GauntletWeb {
     const waves=Object.keys(m.distribution).map(Number).sort((a,b)=>a-b);for(const w of waves){const count=m.distribution[w],bar="█".repeat(Math.min(50,Math.round(50*count/m.runs)));lines.push(`${String(w).padStart(3)}: ${(100*count/m.runs).toFixed(2).padStart(6)}%  ${bar}`);}pre.textContent=lines.join("\n");
   }
   function closeResultTab(id:string):void{
-    const tabs=Array.from(document.querySelectorAll<HTMLElement>(".tab-button"));
+    const tabs=Array.from(document.querySelectorAll<HTMLElement>(".tab-item"));
     const closingIndex=tabs.findIndex(tab=>tab.dataset.tab===id);
     const nextTab=closingIndex>=0 ? (tabs[closingIndex+1]?.dataset.tab ?? tabs[closingIndex-1]?.dataset.tab ?? "experiment") : "experiment";
     resultTabs.delete(id);
-    document.querySelector(`.tab-button[data-tab="${id}"]`)?.remove();
+    document.querySelector(`.tab-item[data-tab="${id}"]`)?.remove();
     document.querySelector(`.tab-panel[data-tab="${id}"]`)?.remove();
     if(activeTab===id)selectTab(nextTab);
   }
   function applyAllSplitRatios():void{document.documentElement.style.setProperty("--result-top",`${state.settings.results_top_ratio*100}%`);}
 
   async function init():Promise<void>{
-    try{await loadConfig();buildMenus();renderTabsBase();renderProfiles();renderExperiment();qs<HTMLButtonElement>("#global-cancel").onclick=cancelRun;selectTab("profiles");setStatus("Ready");}
+    try{
+      await loadConfig();
+      buildMenus();
+      renderTabsBase();
+      renderProfiles();
+      renderExperiment();
+      qs<HTMLButtonElement>("#global-cancel").onclick=cancelRun;
+      if(localStorage.getItem(HELP_DISMISSED_KEY)==="1") selectTab("profiles");
+      else showHelp();
+      setStatus("Ready");
+    }
     catch(err){
       console.error(err);
       const bootError=qs<HTMLElement>("#boot-error");
