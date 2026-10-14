@@ -50,6 +50,11 @@ namespace GauntletWeb {
       try { state = JSON.parse(stored) as Gauntlet.AppState; }
       catch { state = Gauntlet.deepClone(factoryState); }
     } else state = Gauntlet.deepClone(factoryState);
+
+    // Named run-size presets are application defaults, not user-authored data.
+    // Keep them current when the app ships updated preset definitions.
+    state.settings.run_presets = Gauntlet.deepClone(factoryState.settings.run_presets);
+
     Gauntlet.cloneFromMe(state);
     // v0.2 gives the rankings enough room for the usual 12 finalists while
     // keeping a six-wave detail distribution visible below. Preserve any
@@ -256,7 +261,7 @@ namespace GauntletWeb {
     const seed=inputRow(form,"Random seed",String(state.optimizer.seed),"number");
     const checks=el("div","checks");optimizer.appendChild(checks);
     const health=checkbox("Require at least one Health player",state.optimizer.require_health);const force=checkbox("Require at least one Force player",state.optimizer.require_force);checks.append(health.wrap,force.wrap);
-    const persist=()=>{state.optimizer.objective=obj.value as Gauntlet.Objective;state.optimizer.target_wave=Math.max(1,intValue(target,30));state.optimizer.pre_screen_runs=Math.max(1,intValue(pre,1));state.optimizer.pre_screen_filter=Gauntlet.clamp(numValue(cutoff,75)/100,0,1);state.optimizer.screening_runs=Math.max(1,intValue(screen,100));state.optimizer.finalist_runs=Math.max(1,intValue(final,3000));state.optimizer.finalist_count=Math.max(1,intValue(finalists,8));state.optimizer.seed=intValue(seed,12345);state.optimizer.require_health=health.input.checked;state.optimizer.require_force=force.input.checked;saveStateDebounced();};
+    const persist=()=>{state.optimizer.objective=obj.value as Gauntlet.Objective;state.optimizer.target_wave=Math.max(1,intValue(target,30));state.optimizer.pre_screen_runs=Math.max(1,intValue(pre,10));state.optimizer.pre_screen_filter=Gauntlet.clamp(numValue(cutoff,90)/100,0,1);state.optimizer.screening_runs=Math.max(1,intValue(screen,100));state.optimizer.finalist_runs=Math.max(1,intValue(final,3000));state.optimizer.finalist_count=Math.max(1,intValue(finalists,8));state.optimizer.seed=intValue(seed,12345);state.optimizer.require_health=health.input.checked;state.optimizer.require_force=force.input.checked;saveStateDebounced();};
     [obj,target,pre,cutoff,screen,final,finalists,seed,health.input,force.input].forEach(x=>{x.addEventListener("change",persist);x.addEventListener("input",persist);});
     const presets=el("div","preset-row");optimizer.appendChild(presets);presets.appendChild(el("span","","Run size:"));for(const name of ["Fast","Standard","Precise"]){const b=el("button","secondary small",name);b.onclick=()=>{const p=state.settings.run_presets[name];if(!p)return;state.optimizer.pre_screen_runs=p.pre_screen_runs;state.optimizer.screening_runs=p.screening_runs;state.optimizer.finalist_runs=p.finalist_runs;state.optimizer.finalist_count=p.finalist_count;saveStateNow();renderExperiment();};presets.appendChild(b);}
     optimizer.appendChild(el("p","muted","Pre-screening uses a handful of runs to cull clearly weak assignments by the relative cutoff. Survivors get the normal screen, then only the top finalists receive the large sample."));
