@@ -94,7 +94,8 @@ namespace GauntletWeb {
       renderProfiles(); renderExperiment(); if (gameTabVisible) renderGameModel(); setStatus("Restored factory defaults");
     };
     qs<HTMLButtonElement>("#show-game-model").onclick = () => showGameModel();
-    qs<HTMLButtonElement>("#user-guide").onclick = () => showHelp();
+    const userGuideButton = document.querySelector<HTMLButtonElement>("#user-guide");
+    if (userGuideButton) userGuideButton.onclick = () => showHelp();
     qs<HTMLButtonElement>("#about").onclick = () => alert(`Gauntlet Lab Web ${VERSION}\n\nMonte Carlo raid composition and Fortify XP optimizer.\nAll simulations and profile data stay in your browser.`);
   }
 
@@ -500,7 +501,14 @@ namespace GauntletWeb {
 
   async function init():Promise<void>{
     try{await loadConfig();buildMenus();renderTabsBase();renderProfiles();renderExperiment();qs<HTMLButtonElement>("#global-cancel").onclick=cancelRun;selectTab("profiles");setStatus("Ready");}
-    catch(err){console.error(err);qs<HTMLElement>("#boot-error").hidden=false;qs<HTMLElement>("#boot-error").textContent=`Gauntlet Lab could not start: ${err instanceof Error?err.message:String(err)}. The web build must be served over HTTP(S), not opened directly as a file.`;}
+    catch(err){
+      console.error(err);
+      const bootError=qs<HTMLElement>("#boot-error");
+      bootError.hidden=false;
+      const detail=err instanceof Error?err.message:String(err);
+      const fileHint=window.location.protocol==="file:" ? " The web build must be served over HTTP(S), not opened directly as a file." : "";
+      bootError.textContent=`Gauntlet Lab could not start: ${detail}.${fileHint}`;
+    }
   }
   window.addEventListener("DOMContentLoaded",init);
 }
